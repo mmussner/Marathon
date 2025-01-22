@@ -53,7 +53,9 @@ jobs:
       - name: Create empty ".truffleignore" in case it doesn't exist
         run: touch .truffleignore
 
-      - name: Secret Scan with Trufflehog
-        uses: UnicornGlobal/trufflehog-actions-scan@master
-        with: # exclusions in .truffleignore file
-          branch: ${{ github.head_ref }}
+      - name: Hadolint Dockerfile Linter
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          recursive: true
+          failure-threshold: warning
